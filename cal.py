@@ -22,16 +22,19 @@ def main(page: ft.Page):
     def agregar_numero(e):
         valor = e.control.data
 
-        if display.content.value == "0":
-            display.content.value = valor
+        if valor == "AC":
+            display.content.value = "0"
         else:
-            display.content.value += valor
+            if display.content.value == "0":
+                display.content.value = valor
+            else:
+                display.content.value += valor
 
         page.update()
 
     # GRID DE BOTONES
     grid = ft.GridView(
-        runs_count=3,
+        runs_count=2,
         spacing=10,
         run_spacing=10,
         width=210,
@@ -39,8 +42,8 @@ def main(page: ft.Page):
         expand=False
     )
 
-    # BOTONES NUMERICOS
-    numeros = ["7","8","1"]
+    # BOTONES
+    numeros = ["1", "2", "3", "AC"]
 
     for n in numeros:
         grid.controls.append(

@@ -81,21 +81,33 @@ Evento on_click de los botones
 
 A continuación, se define la función que se ejecutará cuando se presione un botón.
 ```
+    # FUNCION DEL CLICK
     def agregar_numero(e):
         valor = e.control.data
 
-        if display.content.value == "0":
-            display.content.value = valor
+        if valor == "AC":
+            display.content.value = "0"
         else:
-            display.content.value += valor
+            if display.content.value == "0":
+                display.content.value = valor
+            else:
+                display.content.value += valor
 
         page.update()
 
 ```
 Esta función recibe un evento (e) que contiene la información del botón presionado.
 El valor del botón se obtiene mediante e.control.data.
-Si el display tiene el valor inicial 0, este se reemplaza por el número presionado; de lo contrario, el número se agrega al contenido actual.
-Finalmente, se actualiza la página para reflejar los cambios en la interfaz.
+
+Si el valor es "AC", el contenido del display se reinicia y se muestra 0, eliminando cualquier número previamente ingresado.
+
+Si el botón presionado es un número:
+
+Si el display contiene "0", este se reemplaza por el número presionado.
+
+En caso contrario, el número se concatena al valor existente.
+
+Finalmente, se utiliza page.update() para actualizar la interfaz y reflejar los cambios en pantalla.
 
 Creación del contenedor de botones
 ```
@@ -114,6 +126,15 @@ El GridView permite organizar los botones en forma de cuadrícula, definiendo el
 Botones numéricos
 ```
     numeros = ["1", "2", "3"]
+```
+Implementación del botón AC (borrar)
+
+Para permitir borrar el contenido mostrado en el área de texto de la calculadora, se agregó un botón con la etiqueta “AC” (All Clear). Este botón tiene la función de reiniciar el valor del display a 0 cuando es presionado.
+
+El botón AC se incluye dentro del mismo arreglo de botones numéricos, asignándole como dato (data) el valor "AC", lo que permite identificarlo dentro de la función que maneja el evento on_click.
+```
+
+numeros = ["7","8","1","AC"]
 ```
 
 Se crea una lista con los números que tendrá la calculadora en esta etapa.
